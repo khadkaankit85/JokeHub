@@ -1,13 +1,21 @@
-import { Dimensions, ScrollView, View } from "react-native";
+import { Dimensions, ScrollView, View, Image } from "react-native";
 import { Text } from "react-native-paper";
+import { categories } from "@/constants/categories";
+import { ReactNode } from "react";
 
 interface CategoryCardProps {
   imageLink: string;
-  jokeCount?: number;
+  jokeCount: number;
   categoryTitle: string;
+  id: number;
 }
 
-const CategoryCard = ({}: CategoryCardProps) => {
+const CategoryCard = ({
+  imageLink,
+  jokeCount,
+  categoryTitle,
+  id,
+}: CategoryCardProps) => {
   return (
     <View
       style={{
@@ -26,6 +34,30 @@ const CategoryCard = ({}: CategoryCardProps) => {
           borderRadius: 10,
         }}
       >
+        <View
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Text
+            style={{
+              marginTop: 4,
+              fontFamily: "MonoSpace",
+              fontWeight: "300",
+            }}
+          >
+            {jokeCount} jokes
+          </Text>
+          <Image
+            src={imageLink}
+            style={{
+              width: 100,
+              height: 100,
+              objectFit: "cover",
+            }}
+          ></Image>
+        </View>
         <Text
           style={{
             fontFamily: "MonoSpace",
@@ -43,7 +75,7 @@ const CategoryCard = ({}: CategoryCardProps) => {
             color: "white",
           }}
         >
-          ONE LINERS
+          {categoryTitle}
         </Text>
       </View>
     </View>
@@ -66,16 +98,15 @@ const CategoryCards = () => {
         display: "flex",
       }}
     >
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
-      <CategoryCard imageLink="" jokeCount={1} categoryTitle="" />
+      {categories.map((category) => (
+        <CategoryCard
+          key={category.id}
+          id={category.id}
+          imageLink={category.imageLink}
+          jokeCount={category.jokeCount}
+          categoryTitle={category.name}
+        />
+      ))}
     </ScrollView>
   );
 };
