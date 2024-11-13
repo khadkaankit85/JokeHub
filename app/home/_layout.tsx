@@ -1,13 +1,22 @@
 import CategoryCards from "@/components/CategoryCards";
-import HomeHeader from "@/components/HomeHeader";
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import { Text } from "react-native-paper";
 
 const HomeBody = () => {
   return (
-    <ScrollView style={styles.scrollview}>
+    <View style={styles.scrollBody}>
       <CategoryCards />
-    </ScrollView>
+    </View>
+  );
+};
+
+const HomeHeader = () => {
+  return (
+    <View style={styles.scrollHead}>
+      <Text style={styles.title}>JOKES</Text>
+      <Text style={styles.subtitle}>15000+ Jokes Collection</Text>
+    </View>
   );
 };
 
@@ -25,9 +34,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#00ABE7",
   },
-  scrollview: {
-    flex: 1 - 1 / 8,
+  scrollBody: {
+    flex: 6 / 7,
     backgroundColor: "transparent",
+  },
+  scrollHead: {
+    flex: 1 / 7,
+  },
+  title: {
+    display: "flex" as "flex",
+    textAlign: "center" as "center",
+    fontSize: 50,
+    fontFamily: "SpaceMono",
+  },
+  subtitle: {
+    textAlign: "center" as "center",
+    fontWeight: "bold" as "bold",
+    color: "white",
+    fontSize: 20,
+    fontFamily: "SpaceMono",
   },
 });
 
