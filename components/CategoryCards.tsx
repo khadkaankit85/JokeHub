@@ -25,7 +25,27 @@ const CategoryCard = ({}: CategoryCardProps) => {
           flex: 1,
           borderRadius: 10,
         }}
-      ></View>
+      >
+        <Text
+          style={{
+            fontFamily: "MonoSpace",
+            borderTopWidth: 2,
+            marginTop: "auto",
+            height: 50,
+            textAlign: "center",
+            textAlignVertical: "bottom",
+            fontWeight: 900,
+            fontSize: 15,
+            paddingTop: 15,
+            backgroundColor: "#00ABE7",
+            borderBottomEndRadius: 8,
+            borderBottomStartRadius: 8,
+            color: "white",
+          }}
+        >
+          ONE LINERS
+        </Text>
+      </View>
     </View>
   );
 };
