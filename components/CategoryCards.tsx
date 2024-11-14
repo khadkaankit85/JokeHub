@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Text } from "react-native-paper";
 import { categories } from "@/constants/categories";
+import { useNavigation } from "expo-router";
 
 interface CategoryCardProps {
   imageLink: string;
@@ -20,10 +21,11 @@ const CategoryCard = ({
   jokeCount,
   categoryTitle,
 }: CategoryCardProps) => {
+  const navigator = useNavigation();
   return (
     <Pressable
       onPress={() => {
-        // navigation.navigate()
+        navigator.navigate("jokepage" as never);
       }}
       // style={({ hovered }) => [styles.button, { opacity: hovered ? 0.5 : 1 }]}
     >
