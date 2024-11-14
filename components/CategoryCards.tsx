@@ -1,7 +1,7 @@
-import { Dimensions, ScrollView, View, Image } from "react-native";
+import { Dimensions, ScrollView, View, Image, Pressable } from "react-native";
 import { Text } from "react-native-paper";
 import { categories } from "@/constants/categories";
-import { ReactNode } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 interface CategoryCardProps {
   imageLink: string;
@@ -9,6 +9,7 @@ interface CategoryCardProps {
   categoryTitle: string;
   id: number;
 }
+const navigation = useNavigation();
 
 const CategoryCard = ({
   imageLink,
@@ -17,68 +18,75 @@ const CategoryCard = ({
   id,
 }: CategoryCardProps) => {
   return (
-    <View
-      style={{
-        borderWidth: 1,
-        backgroundColor: "white",
-        width: Dimensions.get("screen").width / 2.4,
-        height: Dimensions.get("screen").width / 2.4 + 20,
-        padding: 8,
-        borderRadius: 10,
+    <Pressable
+      onPress={() => {
+        // navigation.navigate()
       }}
+      // style={({ hovered }) => [styles.button, { opacity: hovered ? 0.5 : 1 }]}
     >
       <View
         style={{
-          borderWidth: 2,
-          flex: 1,
+          borderWidth: 1,
+          backgroundColor: "white",
+          width: Dimensions.get("screen").width / 2.4,
+          height: Dimensions.get("screen").width / 2.4 + 20,
+          padding: 8,
           borderRadius: 10,
         }}
       >
         <View
           style={{
-            display: "flex",
-            alignItems: "center",
+            borderWidth: 2,
+            flex: 1,
+            borderRadius: 10,
           }}
         >
-          <Text
+          <View
             style={{
-              marginTop: 4,
-              fontFamily: "Poppins",
-              fontWeight: "300",
+              display: "flex",
+              alignItems: "center",
             }}
           >
-            {jokeCount} jokes
-          </Text>
-          <Image
-            src={imageLink}
+            <Text
+              style={{
+                marginTop: 4,
+                fontFamily: "Poppins",
+                fontWeight: "300",
+              }}
+            >
+              {jokeCount} jokes
+            </Text>
+            <Image
+              src={imageLink}
+              style={{
+                width: 100,
+                height: 100,
+                objectFit: "cover",
+              }}
+            ></Image>
+          </View>
+          <Text
             style={{
-              width: 100,
-              height: 100,
-              objectFit: "cover",
+              borderTopWidth: 2,
+              marginTop: "auto",
+              height: 40,
+              textAlign: "center",
+              textAlignVertical: "bottom",
+              fontWeight: 900,
+              fontSize: 15,
+              paddingTop: 15,
+              backgroundColor: "#fcd24b",
+              borderBottomEndRadius: 8,
+              borderBottomStartRadius: 8,
+              color: "black",
+              fontFamily: "Poppins",
             }}
-          ></Image>
+          >
+            {categoryTitle}
+          </Text>
         </View>
-        <Text
-          style={{
-            borderTopWidth: 2,
-            marginTop: "auto",
-            height: 50,
-            textAlign: "center",
-            textAlignVertical: "bottom",
-            fontWeight: 900,
-            fontSize: 15,
-            paddingTop: 15,
-            backgroundColor: "#fcd24b",
-            borderBottomEndRadius: 8,
-            borderBottomStartRadius: 8,
-            color: "black",
-            fontFamily: "Poppins",
-          }}
-        >
-          {categoryTitle}
-        </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -110,5 +118,7 @@ const CategoryCards = () => {
     </ScrollView>
   );
 };
+
+const styles = { button: {} };
 
 export default CategoryCards;

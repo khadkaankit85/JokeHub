@@ -1,9 +1,10 @@
+import icon from "../assets/images/icon.png";
 export const categories = [
   {
     id: 0,
     name: "All",
-    imageLink:
-      "https://img.icons8.com/?size=100&id=49nKj-sKLUGt&format=png&color=000000",
+    imageLink: icon,
+    // "https://img.icons8.com/?size=100&id=49nKj-sKLUGt&format=png&color=000000",
     jokeCount: 10000,
   },
   {
