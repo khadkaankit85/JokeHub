@@ -43,7 +43,7 @@ const CategoryCard = ({
           <Text
             style={{
               marginTop: 4,
-              fontFamily: "MonoSpace",
+              fontFamily: "Poppins",
               fontWeight: "300",
             }}
           >
@@ -71,8 +71,8 @@ const CategoryCard = ({
             backgroundColor: "#fcd24b",
             borderBottomEndRadius: 8,
             borderBottomStartRadius: 8,
-            color: "white",
-            fontFamily: "Rubik",
+            color: "black",
+            fontFamily: "Poppins",
           }}
         >
           {categoryTitle}

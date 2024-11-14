@@ -37,6 +37,9 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     Poppins: require("../assets/fonts/Poppins_Rubik_Mono_One/Poppins/Poppins-Regular.ttf"),
+    PoppinsBold: require("../assets/fonts/Poppins_Rubik_Mono_One/Poppins/Poppins-Bold.ttf"),
+    Delius: require("../assets/fonts/Delius/Delius-Regular.ttf"),
+
     ...FontAwesome.font,
   });
 

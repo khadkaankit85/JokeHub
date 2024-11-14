@@ -86,80 +86,93 @@ export const categories = [
   {
     id: 12,
     name: "Blond",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=82207&format=png&color=000000",
     jokeCount: 598,
   },
   {
     id: 13,
     name: "Yo Momma",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=rYweNlHRdXs2&format=png&color=000000",
     jokeCount: 600,
   },
   {
     id: 14,
     name: "Redneck",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=UMVp0lb7Oeem&format=png&color=000000",
     jokeCount: 241,
   },
   {
     id: 15,
     name: "Religious",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=105358&format=png&color=000000",
     jokeCount: 402,
   },
   {
     id: 16,
     name: "At Work",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=113860&format=png&color=000000",
     jokeCount: 288,
   },
   {
     id: 17,
     name: "College",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=J2t_uKtMD3D7&format=png&color=000000",
     jokeCount: 131,
   },
   {
     id: 18,
     name: "Lightbulb",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=112292&format=png&color=000000",
     jokeCount: 110,
   },
   {
     id: 19,
     name: "Children",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=3jpB51cDRJ4V&format=png&color=000000",
     jokeCount: 605,
   },
   {
     id: 20,
     name: "Insults",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=119255&format=png&color=000000",
     jokeCount: 276,
   },
   {
     id: 21,
     name: "Knock-Knock",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=7EcfJvfDsjMQ&format=png&color=000000",
     jokeCount: 167,
   },
   {
     id: 22,
     name: "Tech",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=111403&format=png&color=000000",
     jokeCount: 151,
   },
 
   {
     id: 23,
     name: "Blonde",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=82207&format=png&color=000000",
     jokeCount: 1,
   },
   {
     id: 24,
     name: "Yo Mama",
-    imageLink: "",
+    imageLink:
+      "https://img.icons8.com/?size=100&id=rYweNlHRdXs2&format=png&color=000000",
     jokeCount: 3,
   },
 ];

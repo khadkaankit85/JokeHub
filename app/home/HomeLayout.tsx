@@ -45,14 +45,15 @@ const styles = StyleSheet.create({
     display: "flex" as "flex",
     textAlign: "center" as "center",
     fontSize: 50,
-    fontFamily: "Poppins",
+    fontFamily: "Delius",
+    fontWeight: "bold",
   },
   subtitle: {
     textAlign: "center" as "center",
     fontWeight: "bold" as "bold",
-    color: "white",
+    color: "black",
     fontSize: 20,
-    fontFamily: "Poppins",
+    fontFamily: "PoppinsBold",
   },
 });
 
