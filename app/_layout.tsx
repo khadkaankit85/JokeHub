@@ -1,15 +1,15 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
-
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   MD3LightTheme as DefaultTheme,
   PaperProvider,
 } from "react-native-paper";
+
 import HomeLayout from "./home/HomeLayout";
 
 export {
@@ -33,13 +33,15 @@ const theme = {
     secondary: "yellow",
   },
 };
+
+const Stack = createNativeStackNavigator();
+
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     Poppins: require("../assets/fonts/Poppins_Rubik_Mono_One/Poppins/Poppins-Regular.ttf"),
     PoppinsBold: require("../assets/fonts/Poppins_Rubik_Mono_One/Poppins/Poppins-Bold.ttf"),
     Delius: require("../assets/fonts/Delius/Delius-Regular.ttf"),
-
     ...FontAwesome.font,
   });
 
@@ -58,17 +60,25 @@ export default function RootLayout() {
     console.log("font not loaded");
     return null;
   }
+
   console.log("loaded");
-  return <HomeLayout />;
+  return <RootLayoutNav />;
 }
 
 function RootLayoutNav() {
   return (
     <PaperProvider theme={theme}>
-      <Stack>
-        <Stack.Screen name="home" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-      </Stack>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeLayout}
+          options={{ title: "Welcome" }}
+        />
+      </Stack.Navigator>
     </PaperProvider>
   );
 }
