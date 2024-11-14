@@ -1,21 +1,24 @@
-import { Dimensions, ScrollView, View, Image, Pressable } from "react-native";
+import {
+  Dimensions,
+  ScrollView,
+  View,
+  Image,
+  Pressable,
+  ImageSourcePropType,
+} from "react-native";
 import { Text } from "react-native-paper";
 import { categories } from "@/constants/categories";
-import { useNavigation } from "@react-navigation/native";
 
 interface CategoryCardProps {
   imageLink: string;
   jokeCount: number;
   categoryTitle: string;
-  id: number;
 }
-const navigation = useNavigation();
 
 const CategoryCard = ({
   imageLink,
   jokeCount,
   categoryTitle,
-  id,
 }: CategoryCardProps) => {
   return (
     <Pressable
@@ -57,7 +60,7 @@ const CategoryCard = ({
               {jokeCount} jokes
             </Text>
             <Image
-              src={imageLink}
+              source={imageLink as unknown as ImageSourcePropType}
               style={{
                 width: 100,
                 height: 100,
@@ -109,7 +112,6 @@ const CategoryCards = () => {
       {categories.map((category) => (
         <CategoryCard
           key={category.id}
-          id={category.id}
           imageLink={category.imageLink}
           jokeCount={category.jokeCount}
           categoryTitle={category.name}
