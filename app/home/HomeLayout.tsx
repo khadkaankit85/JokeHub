@@ -32,7 +32,7 @@ const HomeLayout = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#00ABE7",
+    backgroundColor: "#FFD700",
   },
   scrollBody: {
     flex: 6 / 7,
@@ -45,14 +45,14 @@ const styles = StyleSheet.create({
     display: "flex" as "flex",
     textAlign: "center" as "center",
     fontSize: 50,
-    fontFamily: "SpaceMono",
+    fontFamily: "Poppins",
   },
   subtitle: {
     textAlign: "center" as "center",
     fontWeight: "bold" as "bold",
     color: "white",
     fontSize: 20,
-    fontFamily: "SpaceMono",
+    fontFamily: "Poppins",
   },
 });
 

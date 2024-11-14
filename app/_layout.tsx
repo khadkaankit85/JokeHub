@@ -10,6 +10,7 @@ import {
   MD3LightTheme as DefaultTheme,
   PaperProvider,
 } from "react-native-paper";
+import HomeLayout from "./home/HomeLayout";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -18,7 +19,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "home",
+  initialRouteName: "/modal",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -35,6 +36,7 @@ const theme = {
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Poppins: require("../assets/fonts/Poppins_Rubik_Mono_One/Poppins/Poppins-Regular.ttf"),
     ...FontAwesome.font,
   });
 
@@ -50,10 +52,11 @@ export default function RootLayout() {
   }, [loaded]);
 
   if (!loaded) {
+    console.log("font not loaded");
     return null;
   }
-
-  return <RootLayoutNav />;
+  console.log("loaded");
+  return <HomeLayout />;
 }
 
 function RootLayoutNav() {

@@ -60,7 +60,6 @@ const CategoryCard = ({
         </View>
         <Text
           style={{
-            fontFamily: "MonoSpace",
             borderTopWidth: 2,
             marginTop: "auto",
             height: 50,
@@ -69,10 +68,11 @@ const CategoryCard = ({
             fontWeight: 900,
             fontSize: 15,
             paddingTop: 15,
-            backgroundColor: "#00ABE7",
+            backgroundColor: "#fcd24b",
             borderBottomEndRadius: 8,
             borderBottomStartRadius: 8,
             color: "white",
+            fontFamily: "Rubik",
           }}
         >
           {categoryTitle}
