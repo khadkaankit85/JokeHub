@@ -13,6 +13,7 @@ import HomeLayout from "./home/HomeLayout";
 import JokepageLayout from "./jokepage/JokepageLayout";
 import JokelistLayout from "./jokelist";
 import Header from "@/components/Header";
+import { View } from "react-native";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -97,6 +98,19 @@ function RootLayoutNav() {
               fontFamily: "PoppinsBold",
               fontSize: 20,
             },
+            // headerRight: () => {
+            //   return (
+            //     <FontAwesome.Button
+            //       name="search"
+            //       backgroundColor="transparent"
+            //       size={30}
+            //       color="#007AFF"
+            //       onPress={() => {
+            //         //  #Todo: add the funtionality for search bar
+            //       }}
+            //     />
+            //   );
+            // },
           }}
         />
       </Stack.Navigator>
