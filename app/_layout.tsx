@@ -93,6 +93,10 @@ function RootLayoutNav() {
             headerShown: true,
             headerBackTitle: "back",
             headerTitle: "",
+            headerTitleStyle: {
+              fontFamily: "PoppinsBold",
+              fontSize: 20,
+            },
           }}
         />
       </Stack.Navigator>
