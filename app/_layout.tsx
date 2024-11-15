@@ -10,6 +10,7 @@ import {
 } from "react-native-paper";
 
 import HomeLayout from "./home/HomeLayout";
+import JokepageLayout from "./jokepage/JokepageLayout";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -75,6 +76,11 @@ function RootLayoutNav() {
         <Stack.Screen
           name="Home"
           component={HomeLayout}
+          options={{ title: "Welcome" }}
+        />
+        <Stack.Screen
+          name="jokepage"
+          component={JokepageLayout}
           options={{ title: "Welcome" }}
         />
       </Stack.Navigator>
