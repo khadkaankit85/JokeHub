@@ -11,6 +11,8 @@ import {
 
 import HomeLayout from "./home/HomeLayout";
 import JokepageLayout from "./jokepage/JokepageLayout";
+import JokelistLayout from "./jokelist";
+import Header from "@/components/Header";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -70,18 +72,28 @@ function RootLayoutNav() {
     <PaperProvider theme={theme}>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
         }}
       >
         <Stack.Screen
           name="Home"
           component={HomeLayout}
-          options={{ title: "Welcome" }}
+          options={{ title: "Welcome", headerShown: false }}
         />
         <Stack.Screen
           name="jokepage"
           component={JokepageLayout}
-          options={{ title: "Welcome" }}
+          // options={{ title: "Back", header: Header }}
+        />
+        <Stack.Screen
+          name="jokelist"
+          component={JokelistLayout}
+          initialParams={{ category: "All" }}
+          options={{
+            headerShown: true,
+            headerBackTitle: "back",
+            headerTitle: "",
+          }}
         />
       </Stack.Navigator>
     </PaperProvider>

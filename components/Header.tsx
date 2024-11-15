@@ -1,6 +1,5 @@
 import { useNavigation } from "expo-router";
-import { Dimensions, Image, Pressable } from "react-native";
-import { View } from "react-native-reanimated/lib/typescript/Animated";
+import { Dimensions, Image, Pressable, View } from "react-native";
 
 const Header = () => {
   const nav = useNavigation();
@@ -21,7 +20,7 @@ const Header = () => {
         }}
       >
         <Image
-          source={require("../../assets/images/backbutton.png")}
+          source={require("../assets/images/backbutton.png")}
           style={{
             width: 35,
             height: 35,

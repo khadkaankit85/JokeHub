@@ -14,7 +14,7 @@ const JokepageLayout = () => {
   return (
     <SafeAreaView>
       <View>
-        <Text>hello bro, enjoy {route.params?.category}</Text>
+        <Text>this is where you read joke</Text>
       </View>
     </SafeAreaView>
   );

@@ -28,7 +28,7 @@ const CategoryCard = ({
   return (
     <Pressable
       onPress={() => {
-        navigator.navigate("jokepage", { category: categoryTitle });
+        navigator.navigate("jokelist", { category: categoryTitle });
       }}
       // style={({ hovered }) => [styles.button, { opacity: hovered ? 0.5 : 1 }]}
     >

@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
-import { Text } from "react-native-paper";
+import { Text, Title } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 
-const JokepageLayout = () => {
-  const route = useRoute<{
-    key: string;
-    name: string;
-    params: { category: string };
-  }>();
-  console.log(route);
+const JokelistLayout = () => {
+  const route = useRoute();
+  const { category } = route.params as { category: string };
+
+  const nav = useNavigation();
+
+  useEffect(() => {
+    nav.setOptions({ headerTitle: category });
+  }, [nav, category]);
 
   return (
     <SafeAreaView>
       <View>
-        <Text>hello bro, enjoy {route.params?.category}</Text>
+        <Text>
+          this is where you are gonna find the list of jokes about {category}{" "}
+        </Text>
       </View>
     </SafeAreaView>
   );
 };
 
-export default JokepageLayout;
+export default JokelistLayout;
