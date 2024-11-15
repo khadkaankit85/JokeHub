@@ -84,7 +84,15 @@ function RootLayoutNav() {
         <Stack.Screen
           name="jokepage"
           component={JokepageLayout}
-          // options={{ title: "Back", header: Header }}
+          options={{
+            headerShown: true,
+            headerBackTitle: "back",
+            headerTitle: "",
+            headerTitleStyle: {
+              fontFamily: "PoppinsBold",
+              fontSize: 20,
+            },
+          }}
         />
         <Stack.Screen
           name="jokelist"

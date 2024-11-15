@@ -1,46 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, FlatList, View } from "react-native";
+import { Dimensions, FlatList, Pressable, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import {
+  useRoute,
+  useNavigation,
+  NavigationProp,
+} from "@react-navigation/native";
 import { Text } from "react-native-paper";
 import { alljokes } from "../../appdata";
+import { RootStackParamList } from "@/constants/types";
 
 interface ListItem {
   id: number;
   body: string;
   category: string;
   title: string;
+  globalCategory: string;
 }
-const ListItem = ({ id, body, category, title }: ListItem) => {
+const ListItem = ({ id, body, category, title, globalCategory }: ListItem) => {
+  const navigator = useNavigation<NavigationProp<RootStackParamList>>();
   return (
-    <View
-      style={{
-        borderBottomWidth: 1,
-        width: Dimensions.get("screen").width * 0.95,
-        height: 90,
-        marginHorizontal: "auto",
-        paddingTop: 4,
-        paddingLeft: 4,
+    <Pressable
+      onPress={() => {
+        navigator.navigate("jokepage", { category, id, globalCategory });
       }}
     >
-      <Text
+      <View
         style={{
-          fontFamily: "PoppinsBold",
-          fontSize: 20,
+          borderBottomWidth: 1,
+          width: Dimensions.get("screen").width * 0.95,
+          height: 90,
+          marginHorizontal: "auto",
+          paddingTop: 4,
+          paddingLeft: 4,
         }}
       >
-        {title}
-      </Text>
-      <Text
-        style={{
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-        }}
-        numberOfLines={2}
-      >
-        {body}
-      </Text>
-    </View>
+        <Text
+          style={{
+            fontFamily: "PoppinsBold",
+            fontSize: 20,
+          }}
+        >
+          {title}
+        </Text>
+        <Text
+          style={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+          numberOfLines={2}
+        >
+          {body}
+        </Text>
+      </View>
+    </Pressable>
   );
 };
 
@@ -93,6 +106,7 @@ const JokelistLayout = () => {
                 body={item.item.body}
                 category={item.item.category}
                 title={item.item.title}
+                globalCategory={category}
               />
             );
           }}
