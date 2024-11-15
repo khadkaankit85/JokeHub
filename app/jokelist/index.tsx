@@ -7,7 +7,7 @@ import {
   NavigationProp,
 } from "@react-navigation/native";
 import { Text } from "react-native-paper";
-import { alljokes } from "../../appdata";
+import { alljokes } from "@/appdata";
 import { RootStackParamList } from "@/constants/types";
 
 interface ListItem {
@@ -64,6 +64,10 @@ const JokelistLayout = () => {
   const nav = useNavigation();
   useEffect(() => {
     nav.setOptions({ headerTitle: category });
+
+    return () => {
+      nav.setOptions({ headerTitle: "" }); // Reset header title on unmount
+    };
   }, [nav, category]);
 
   let jokes = alljokes;

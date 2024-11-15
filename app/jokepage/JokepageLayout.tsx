@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Dimensions, ScrollView, View } from "react-native";
 import { Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRoute, useNavigation } from "@react-navigation/native";
@@ -38,7 +38,27 @@ const JokepageLayout = () => {
 
   return (
     <SafeAreaView>
-      <View>{currentJoke != undefined && <Text>{currentJoke.body}</Text>}</View>
+      <ScrollView
+        style={{
+          width: Dimensions.get("screen").width * 0.95,
+          margin: "auto",
+          minHeight: Dimensions.get("screen").height * 0.7,
+          maxHeight: "auto",
+        }}
+      >
+        {currentJoke != undefined && (
+          <Text
+            style={{
+              fontFamily: "Poppins",
+              fontSize: 16,
+              zIndex: 100,
+            }}
+          >
+            {currentJoke.body}
+          </Text>
+        )}
+        <View></View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
