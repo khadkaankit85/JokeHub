@@ -32,7 +32,7 @@ const HomeLayout = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFD700",
+    backgroundColor: "#FFD700", //007AFF possible next color
   },
   scrollBody: {
     flex: 6 / 7,
