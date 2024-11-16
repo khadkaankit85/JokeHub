@@ -7,8 +7,8 @@ import {
   NavigationProp,
 } from "@react-navigation/native";
 import { Text } from "react-native-paper";
-import { alljokes } from "@/appdata";
-import { RootStackParamList } from "@/constants/types";
+import { RootStackParamList } from "../../constants/types";
+import alljokes from "../../constants/appdata";
 
 interface ListItem {
   id: number;

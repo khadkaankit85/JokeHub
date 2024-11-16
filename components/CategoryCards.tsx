@@ -7,10 +7,10 @@ import {
   ImageSourcePropType,
 } from "react-native";
 import { Text } from "react-native-paper";
-import { categories } from "@/constants/categories";
+import { categories } from "../constants/categories";
 import { useNavigation } from "expo-router";
 import { NavigationProp } from "@react-navigation/native";
-import { RootStackParamList } from "@/constants/types";
+import { RootStackParamList } from "../constants/types";
 
 interface CategoryCardProps {
   imageLink: string;

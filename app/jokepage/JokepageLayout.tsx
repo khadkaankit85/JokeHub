@@ -4,8 +4,8 @@ import { Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRoute, useNavigation } from "@react-navigation/native";
 
-import { alljokes } from "@/appdata";
 import { Joke } from "@/constants/types";
+import { alljokes } from "@/constants/appdata.ts";
 
 const JokepageLayout = () => {
   const navigation = useNavigation();
