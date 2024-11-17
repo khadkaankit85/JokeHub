@@ -8,7 +8,7 @@ import {
 } from "@react-navigation/native";
 import { Text } from "react-native-paper";
 import { RootStackParamList } from "../../constants/types";
-import alljokes from "../../constants/appdata";
+import { alljokes } from "../../constants/appdata";
 
 interface ListItem {
   id: number;

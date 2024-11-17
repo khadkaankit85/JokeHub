@@ -47,6 +47,9 @@ const CategoryCard = ({
             borderWidth: 2,
             flex: 1,
             borderRadius: 10,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <View
@@ -88,6 +91,7 @@ const CategoryCard = ({
               borderBottomStartRadius: 8,
               color: "black",
               fontFamily: "Poppins",
+              width: "100%",
             }}
           >
             {categoryTitle}

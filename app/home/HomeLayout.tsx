@@ -15,7 +15,7 @@ const HomeHeader = () => {
   return (
     <View style={styles.scrollHead}>
       <Text style={styles.title}>JOKES</Text>
-      <Text style={styles.subtitle}>15000+ Jokes Collection</Text>
+      <Text style={styles.subtitle}>10000+ Jokes Collection</Text>
     </View>
   );
 };
