@@ -28,7 +28,7 @@ const JokepageLayout = () => {
 
   useEffect(() => {
     let thatJoke = currentJokeList.findIndex((joke) => joke.id == id);
-    if (thatJoke) {
+    if (thatJoke != undefined) {
       setCurrentJokeIndex(thatJoke);
       // navigation.setOptions({
       //   headerTitle: currentJokeList[thatJoke].title || 404,
@@ -37,14 +37,17 @@ const JokepageLayout = () => {
   }, []);
 
   const onGetPreviousJoke = () => {
-    if (currentJokeIndex && currentJokeIndex >= 0) {
+    if (currentJokeIndex && currentJokeIndex > 0) {
       topElement.current?.scrollTo({ x: 0, y: 0, animated: false });
-      setCurrentJokeIndex((prev) => (prev !== undefined ? prev + 1 : 0));
+      setCurrentJokeIndex((prev) => (prev !== undefined ? prev - 1 : 0));
     }
   };
 
   const onGetNextJoke = () => {
-    if (currentJokeIndex && currentJokeIndex + 1 < currentJokeList.length - 1) {
+    if (
+      currentJokeIndex != undefined &&
+      currentJokeIndex + 1 < currentJokeList.length - 1
+    ) {
       topElement.current?.scrollTo({ x: 0, y: 0, animated: false });
       setCurrentJokeIndex((prev) => (prev !== undefined ? prev + 1 : 0));
     }
@@ -63,31 +66,32 @@ const JokepageLayout = () => {
           maxHeight: "auto",
         }}
       >
-        {currentJokeIndex && currentJokeList[currentJokeIndex] != undefined && (
-          <>
-            <Text
-              style={{
-                width: Dimensions.get("screen").width * 0.9,
-                minHeight: 60,
-                fontSize: 25,
-                fontFamily: "PoppinsBold",
-                textAlign: "center",
-                height: "auto",
-              }}
-            >
-              {currentJokeList[currentJokeIndex].title}
-            </Text>
-            <Text
-              style={{
-                fontFamily: "Poppins",
-                fontSize: 16,
-                zIndex: 100,
-              }}
-            >
-              {currentJokeList[currentJokeIndex].body}
-            </Text>
-          </>
-        )}
+        {currentJokeIndex != undefined &&
+          currentJokeList[currentJokeIndex] != undefined && (
+            <>
+              <Text
+                style={{
+                  width: Dimensions.get("screen").width * 0.9,
+                  minHeight: 60,
+                  fontSize: 25,
+                  fontFamily: "PoppinsBold",
+                  textAlign: "center",
+                  height: "auto",
+                }}
+              >
+                {currentJokeList[currentJokeIndex].title}
+              </Text>
+              <Text
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: 16,
+                  zIndex: 100,
+                }}
+              >
+                {currentJokeList[currentJokeIndex].body}
+              </Text>
+            </>
+          )}
         <View>
           <Button
             title="onGetNextJoke"
