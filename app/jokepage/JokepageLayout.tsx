@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Dimensions, ScrollView, View } from "react-native";
 import { Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRoute, useNavigation } from "@react-navigation/native";
-
-import { Joke } from "@/constants/types";
 import { alljokes } from "@/constants/appdata.ts";
 
 const JokepageLayout = () => {
   const navigation = useNavigation();
   const route = useRoute();
+
+  const topElement = useRef<ScrollView>(null);
 
   const { category, id, globalCategory } = route.params as {
     category: string;
@@ -38,12 +38,14 @@ const JokepageLayout = () => {
 
   const onGetPreviousJoke = () => {
     if (currentJokeIndex && currentJokeIndex >= 0) {
+      topElement.current?.scrollTo({ x: 0, y: 0, animated: false });
       setCurrentJokeIndex((prev) => (prev !== undefined ? prev + 1 : 0));
     }
   };
 
   const onGetNextJoke = () => {
     if (currentJokeIndex && currentJokeIndex + 1 < currentJokeList.length - 1) {
+      topElement.current?.scrollTo({ x: 0, y: 0, animated: false });
       setCurrentJokeIndex((prev) => (prev !== undefined ? prev + 1 : 0));
     }
   };
@@ -53,6 +55,7 @@ const JokepageLayout = () => {
   return (
     <SafeAreaView>
       <ScrollView
+        ref={topElement}
         style={{
           width: Dimensions.get("screen").width * 0.95,
           margin: "auto",
