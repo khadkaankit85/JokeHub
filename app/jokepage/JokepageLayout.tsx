@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, ScrollView, View } from "react-native";
+import { Button, Dimensions, ScrollView, View } from "react-native";
 import { Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRoute, useNavigation } from "@react-navigation/native";
@@ -30,11 +30,23 @@ const JokepageLayout = () => {
     let thatJoke = currentJokeList.findIndex((joke) => joke.id == id);
     if (thatJoke) {
       setCurrentJokeIndex(thatJoke);
-      navigation.setOptions({
-        headerTitle: currentJokeList[thatJoke].title || 404,
-      });
+      // navigation.setOptions({
+      //   headerTitle: currentJokeList[thatJoke].title || 404,
+      // });
     }
   }, []);
+
+  const onGetPreviousJoke = () => {
+    if (currentJokeIndex && currentJokeIndex >= 0) {
+      setCurrentJokeIndex((prev) => (prev !== undefined ? prev + 1 : 0));
+    }
+  };
+
+  const onGetNextJoke = () => {
+    if (currentJokeIndex && currentJokeIndex + 1 < currentJokeList.length - 1) {
+      setCurrentJokeIndex((prev) => (prev !== undefined ? prev + 1 : 0));
+    }
+  };
 
   //TODO:implement save to localstorage so that accessing jokes of different catagory is faster next time
 
@@ -49,17 +61,44 @@ const JokepageLayout = () => {
         }}
       >
         {currentJokeIndex && currentJokeList[currentJokeIndex] != undefined && (
-          <Text
-            style={{
-              fontFamily: "Poppins",
-              fontSize: 16,
-              zIndex: 100,
-            }}
-          >
-            {currentJokeList[currentJokeIndex].body}
-          </Text>
+          <>
+            <Text
+              style={{
+                width: Dimensions.get("screen").width * 0.9,
+                minHeight: 60,
+                fontSize: 25,
+                fontFamily: "PoppinsBold",
+                textAlign: "center",
+                height: "auto",
+              }}
+            >
+              {currentJokeList[currentJokeIndex].title}
+            </Text>
+            <Text
+              style={{
+                fontFamily: "Poppins",
+                fontSize: 16,
+                zIndex: 100,
+              }}
+            >
+              {currentJokeList[currentJokeIndex].body}
+            </Text>
+          </>
         )}
-        <View></View>
+        <View>
+          <Button
+            title="onGetNextJoke"
+            onPress={() => {
+              onGetNextJoke();
+            }}
+          />
+          <Button
+            title="onGetPreviousJoke"
+            onPress={() => {
+              onGetPreviousJoke();
+            }}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
