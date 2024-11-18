@@ -4,6 +4,7 @@ import { Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { alljokes } from "@/constants/appdata.ts";
+import GestureRecognizer from "react-native-swipe-gestures";
 
 const JokepageLayout = () => {
   const navigation = useNavigation();
@@ -57,56 +58,63 @@ const JokepageLayout = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView
-        ref={topElement}
-        style={{
-          width: Dimensions.get("screen").width * 0.95,
-          margin: "auto",
-          minHeight: Dimensions.get("screen").height * 0.7,
-          maxHeight: "auto",
+      <GestureRecognizer
+        onSwipeLeft={() => onGetNextJoke()}
+        onSwipeRight={() => {
+          onGetPreviousJoke();
         }}
       >
-        {currentJokeIndex != undefined &&
-          currentJokeList[currentJokeIndex] != undefined && (
-            <>
-              <Text
-                style={{
-                  width: Dimensions.get("screen").width * 0.9,
-                  minHeight: 60,
-                  fontSize: 25,
-                  fontFamily: "PoppinsBold",
-                  textAlign: "center",
-                  height: "auto",
-                }}
-              >
-                {currentJokeList[currentJokeIndex].title}
-              </Text>
-              <Text
-                style={{
-                  fontFamily: "Poppins",
-                  fontSize: 16,
-                  zIndex: 100,
-                }}
-              >
-                {currentJokeList[currentJokeIndex].body}
-              </Text>
-            </>
-          )}
-        <View>
-          <Button
-            title="onGetNextJoke"
-            onPress={() => {
-              onGetNextJoke();
-            }}
-          />
-          <Button
-            title="onGetPreviousJoke"
-            onPress={() => {
-              onGetPreviousJoke();
-            }}
-          />
-        </View>
-      </ScrollView>
+        <ScrollView
+          ref={topElement}
+          style={{
+            width: Dimensions.get("screen").width * 0.95,
+            margin: "auto",
+            minHeight: Dimensions.get("screen").height * 0.7,
+            maxHeight: "auto",
+          }}
+        >
+          {currentJokeIndex != undefined &&
+            currentJokeList[currentJokeIndex] != undefined && (
+              <>
+                <Text
+                  style={{
+                    width: Dimensions.get("screen").width * 0.9,
+                    minHeight: 60,
+                    fontSize: 25,
+                    fontFamily: "PoppinsBold",
+                    textAlign: "center",
+                    height: "auto",
+                  }}
+                >
+                  {currentJokeList[currentJokeIndex].title}
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: "Poppins",
+                    fontSize: 16,
+                    zIndex: 100,
+                  }}
+                >
+                  {currentJokeList[currentJokeIndex].body}
+                </Text>
+              </>
+            )}
+          <View>
+            {/* <Button
+              title="onGetNextJoke"
+              onPress={() => {
+                onGetNextJoke();
+              }}
+            />
+            <Button
+              title="onGetPreviousJoke"
+              onPress={() => {
+                onGetPreviousJoke();
+              }}
+            /> */}
+          </View>
+        </ScrollView>
+      </GestureRecognizer>
     </SafeAreaView>
   );
 };
