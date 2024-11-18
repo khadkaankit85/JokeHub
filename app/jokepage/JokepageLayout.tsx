@@ -24,13 +24,15 @@ const JokepageLayout = () => {
     );
   }
 
-  const [currentJoke, setCurrentJoke] = useState<Joke>();
+  const [currentJokeIndex, setCurrentJokeIndex] = useState<number>();
 
   useEffect(() => {
-    let thatJoke = currentJokeList.find((joke) => joke.id == id);
+    let thatJoke = currentJokeList.findIndex((joke) => joke.id == id);
     if (thatJoke) {
-      setCurrentJoke(thatJoke);
-      navigation.setOptions({ headerTitle: thatJoke.title || 404 });
+      setCurrentJokeIndex(thatJoke);
+      navigation.setOptions({
+        headerTitle: currentJokeList[thatJoke].title || 404,
+      });
     }
   }, []);
 
@@ -46,7 +48,7 @@ const JokepageLayout = () => {
           maxHeight: "auto",
         }}
       >
-        {currentJoke != undefined && (
+        {currentJokeIndex && currentJokeList[currentJokeIndex] != undefined && (
           <Text
             style={{
               fontFamily: "Poppins",
@@ -54,7 +56,7 @@ const JokepageLayout = () => {
               zIndex: 100,
             }}
           >
-            {currentJoke.body}
+            {currentJokeList[currentJokeIndex].body}
           </Text>
         )}
         <View></View>
