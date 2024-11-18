@@ -1,19 +1,18 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "react-native-reanimated";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   MD3LightTheme as DefaultTheme,
   PaperProvider,
+  Text,
 } from "react-native-paper";
 
 import HomeLayout from "./home/HomeLayout";
 import JokepageLayout from "./jokepage/JokepageLayout";
 import JokelistLayout from "./jokelist";
-import Header from "@/components/Header";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -24,9 +23,6 @@ export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "/modal",
 };
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
 
 const theme = {
   ...DefaultTheme,
@@ -48,23 +44,42 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
+  const [isReady, setIsReady] = useState(false);
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
+
+    // Add a timeout to ensure the splash screen stays for at least 2 seconds
+    const timeout = setTimeout(() => {
+      setIsReady(true);
+    }, 1500);
+
+    return () => clearTimeout(timeout); // Clean up timeout on unmount
   }, [error]);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    console.log("font not loaded");
-    return null;
+  if (!loaded || !isReady) {
+    return (
+      <View
+        style={{
+          backgroundColor: "white",
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Image
+          source={require("../assets/images/loader.gif")}
+          width={800}
+          height={800}
+          style={{
+            objectFit: "cover",
+          }}
+        />
+      </View>
+    );
   }
 
-  console.log("loaded");
   return <RootLayoutNav />;
 }
 
@@ -106,19 +121,6 @@ function RootLayoutNav() {
               fontFamily: "PoppinsBold",
               fontSize: 20,
             },
-            // headerRight: () => {
-            //   return (
-            //     <FontAwesome.Button
-            //       name="search"
-            //       backgroundColor="transparent"
-            //       size={30}
-            //       color="#007AFF"
-            //       onPress={() => {
-            //         //  #Todo: add the funtionality for search bar
-            //       }}
-            //     />
-            //   );
-            // },
           }}
         />
       </Stack.Navigator>
