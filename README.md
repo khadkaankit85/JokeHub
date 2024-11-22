@@ -4,7 +4,7 @@
 
 Welcome to the Joke Collection App! This app contains over 10,000 jokes and is built using React Native and TypeScript. It is designed to provide users with a vast collection of jokes, all easily accessible and rendered with lazy loading for optimized performance.
 
-![Jokes Collection App](https://github.com/khadkaankit85/Assets/blob/master/JokesCollectionApp/3.jpeg?raw=true)
+![banner](https://github.com/khadkaankit85/Assets/blob/master/JokesCollectionApp/1.png?raw=true)
 
 ### Features
 
@@ -12,13 +12,6 @@ Welcome to the Joke Collection App! This app contains over 10,000 jokes and is b
 - **Lazy Loading**: Efficiently renders jokes as you scroll, improving app performance.
 - **User-Friendly Interface**: Simple and intuitive design for easy navigation.
 - **Offline Access**: The app stores jokes for offline use, ensuring you can always enjoy a good laugh, even without an internet connection.
-
-## Screenshots
-
-![Splash Screen](https://github.com/khadkaankit85/Assets/blob/master/JokesCollectionApp/4.jpeg?raw=true)
-![Home Screen](https://github.com/khadkaankit85/Assets/blob/master/JokesCollectionApp/3.jpeg?raw=true)
-![Joke Screen](https://github.com/khadkaankit85/Assets/blob/master/JokesCollectionApp/1.jpeg?raw=true)
-![Joke Screen](https://github.com/khadkaankit85/Assets/blob/master/JokesCollectionApp/2.jpeg?raw=true)
 
 ## Technologies Used
 
