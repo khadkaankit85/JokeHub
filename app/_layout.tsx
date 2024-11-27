@@ -1,7 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { useState, useEffect } from "react";
-import "react-native-reanimated";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   MD3LightTheme as DefaultTheme,

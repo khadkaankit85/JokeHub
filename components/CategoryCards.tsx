@@ -24,6 +24,8 @@ const CategoryCard = ({
   categoryTitle,
 }: CategoryCardProps) => {
   const navigator = useNavigation<NavigationProp<RootStackParamList>>();
+  const screenwidth = Dimensions.get("screen").width;
+  const screenheight = Dimensions.get("screen").height;
 
   return (
     <Pressable
@@ -34,17 +36,17 @@ const CategoryCard = ({
     >
       <View
         style={{
-          borderWidth: 1,
+          borderWidth: 2,
           backgroundColor: "white",
-          width: Dimensions.get("screen").width / 2.4,
-          height: Dimensions.get("screen").width / 2.4 + 20,
-          padding: 8,
+          width: screenwidth / 2.4,
+          height: screenheight / 5,
           borderRadius: 10,
+          overflow: "hidden",
         }}
       >
         <View
           style={{
-            borderWidth: 2,
+            borderWidth: 0,
             flex: 1,
             borderRadius: 10,
             display: "flex",
@@ -80,12 +82,10 @@ const CategoryCard = ({
             style={{
               borderTopWidth: 2,
               marginTop: "auto",
-              height: 40,
+              height: "100%",
               textAlign: "center",
-              textAlignVertical: "bottom",
               fontWeight: 900,
               fontSize: 15,
-              paddingTop: 15,
               backgroundColor: "#fcd24b",
               borderBottomEndRadius: 8,
               borderBottomStartRadius: 8,
