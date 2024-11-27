@@ -2,7 +2,7 @@
   "expo": {
     "name": "JokeHub",
     "slug": "JokesCollection",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -23,7 +23,7 @@
         "backgroundColor": "#fff500"
       },
       "package": "com.khadkaankit85.JokesCollection",
-      "versionCode": 4
+      "versionCode": 5
     },
     "web": {
       "bundler": "metro",
@@ -52,3 +52,4 @@
     }
   }
 }
+
