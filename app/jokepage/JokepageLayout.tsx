@@ -1,14 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, Button, Dimensions, ScrollView, View } from "react-native";
-import { Text } from "react-native-paper";
+import {
+  Animated,
+  Dimensions,
+  ScrollView,
+  View,
+  StyleSheet,
+} from "react-native";
+import { Text, IconButton, Surface, FAB } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { alljokes } from "@/constants/appdata.ts";
 import GestureRecognizer from "react-native-swipe-gestures";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const JokepageLayout = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const topElement = useRef<ScrollView>(null);
 
@@ -31,11 +39,46 @@ const JokepageLayout = () => {
     let thatJoke = currentJokeList.findIndex((joke) => joke.id == id);
     if (thatJoke != undefined) {
       setCurrentJokeIndex(thatJoke);
-      // navigation.setOptions({
-      //   headerTitle: currentJokeList[thatJoke].title || 404,
-      // });
+      checkIfFavorite(id);
     }
   }, []);
+
+  const checkIfFavorite = async (jokeId: number) => {
+    try {
+      const favorites = await AsyncStorage.getItem("favorites");
+      if (favorites) {
+        const favoritesList = JSON.parse(favorites);
+        setIsFavorite(favoritesList.includes(jokeId));
+      }
+    } catch (error) {
+      console.error("Error checking favorites:", error);
+    }
+  };
+
+  const toggleFavorite = async () => {
+    if (currentJokeIndex === undefined) return;
+
+    try {
+      const favorites = await AsyncStorage.getItem("favorites");
+      let favoritesList = favorites ? JSON.parse(favorites) : [];
+
+      const currentJokeId = currentJokeList[currentJokeIndex].id;
+
+      if (isFavorite) {
+        favoritesList = favoritesList.filter(
+          (id: number) => id !== currentJokeId
+        );
+      } else {
+        favoritesList.push(currentJokeId);
+      }
+
+      await AsyncStorage.setItem("favorites", JSON.stringify(favoritesList));
+      setIsFavorite(!isFavorite);
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
+  };
+
   useEffect(() => {
     comeIn();
   }, [currentJokeIndex]);
@@ -69,72 +112,92 @@ const JokepageLayout = () => {
   //TODO:implement save to localstorage so that accessing jokes of different catagory is faster next time
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Animated.View
-        style={{
-          transform: [{ translateX: transAnimation }],
-        }}
+        style={[
+          styles.animatedContainer,
+          {
+            transform: [{ translateX: transAnimation }],
+          },
+        ]}
       >
         <GestureRecognizer
           onSwipeLeft={() => onGetNextJoke()}
-          onSwipeRight={() => {
-            onGetPreviousJoke();
-          }}
+          onSwipeRight={() => onGetPreviousJoke()}
         >
-          <ScrollView
-            ref={topElement}
-            style={{
-              width: Dimensions.get("screen").width * 0.95,
-              margin: "auto",
-              minHeight: Dimensions.get("screen").height * 0.7,
-              maxHeight: "auto",
-            }}
-          >
-            {currentJokeIndex != undefined &&
-              currentJokeList[currentJokeIndex] != undefined && (
-                <>
-                  <Text
-                    style={{
-                      width: Dimensions.get("screen").width * 0.9,
-                      minHeight: 60,
-                      fontSize: 25,
-                      fontFamily: "PoppinsBold",
-                      textAlign: "center",
-                      height: "auto",
-                    }}
-                  >
-                    {currentJokeList[currentJokeIndex].title}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: 16,
-                      zIndex: 100,
-                    }}
-                  >
-                    {currentJokeList[currentJokeIndex].body}
-                  </Text>
-                </>
-              )}
-            <View>
-              {/* <Button
-              title="onGetNextJoke"
-              onPress={() => {
-                onGetNextJoke();
-              }}
-            />
-            <Button
-              title="onGetPreviousJoke"
-              onPress={() => {
-                onGetPreviousJoke();
-              }}
-            /> */}
-            </View>
-          </ScrollView>
+          <Surface style={styles.jokeCard} elevation={4}>
+            <ScrollView
+              ref={topElement}
+              style={styles.scrollView}
+              showsVerticalScrollIndicator={false}
+            >
+              {currentJokeIndex != undefined &&
+                currentJokeList[currentJokeIndex] != undefined && (
+                  <>
+                    <Text style={styles.title}>
+                      {currentJokeList[currentJokeIndex].title}
+                    </Text>
+                    <Text style={styles.body}>
+                      {currentJokeList[currentJokeIndex].body}
+                    </Text>
+                  </>
+                )}
+            </ScrollView>
+          </Surface>
         </GestureRecognizer>
       </Animated.View>
+
+      <View style={styles.fabContainer}>
+        <FAB
+          icon={isFavorite ? "heart" : "heart-outline"}
+          style={styles.fab}
+          onPress={toggleFavorite}
+          color={isFavorite ? "#FF6B6B" : "#666666"}
+        />
+      </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F7F7F7",
+  },
+  animatedContainer: {
+    flex: 1,
+  },
+  jokeCard: {
+    margin: 16,
+    borderRadius: 16,
+    overflow: "hidden",
+    backgroundColor: "#FFFFFF",
+  },
+  scrollView: {
+    padding: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontFamily: "PoppinsBold",
+    textAlign: "center",
+    marginBottom: 16,
+    color: "#2D3436",
+  },
+  body: {
+    fontFamily: "Poppins",
+    fontSize: 16,
+    lineHeight: 24,
+    color: "#2D3436",
+  },
+  fabContainer: {
+    position: "absolute",
+    right: 16,
+    bottom: 16,
+  },
+  fab: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 28,
+  },
+});
 
 export default JokepageLayout;

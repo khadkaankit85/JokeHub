@@ -1,135 +1,151 @@
-import {
-  Dimensions,
-  ScrollView,
-  View,
-  Image,
-  Pressable,
-  ImageSourcePropType,
-} from "react-native";
-import { Text } from "react-native-paper";
+import { View, Pressable, StyleSheet, Dimensions } from "react-native";
+import { Text, Surface } from "react-native-paper";
 import { categories } from "../constants/categories";
 import { useNavigation } from "expo-router";
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "../constants/types";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-interface CategoryCardProps {
-  imageLink: string;
+const { width } = Dimensions.get("window");
+const ITEM_WIDTH = (width - 48) / 3; // 3 items per row with 16px padding on each side and 16px gap
+
+interface CategoryItemProps {
   jokeCount: number;
   categoryTitle: string;
 }
 
-const CategoryCard = ({
-  imageLink,
-  jokeCount,
-  categoryTitle,
-}: CategoryCardProps) => {
+const CategoryItem = ({ jokeCount, categoryTitle }: CategoryItemProps) => {
   const navigator = useNavigation<NavigationProp<RootStackParamList>>();
-  const screenwidth = Dimensions.get("screen").width;
-  const screenheight = Dimensions.get("screen").height;
+
+  const getCategoryIcon = (category: string) => {
+    switch (category.toLowerCase()) {
+      case "animal":
+        return "paw";
+      case "bar":
+        return "glass-cocktail";
+      case "blonde":
+      case "blond":
+        return "face-woman";
+      case "children":
+        return "baby-face";
+      case "college":
+        return "school";
+      case "gross":
+        return "emoticon-poop";
+      case "insults":
+        return "emoticon-angry";
+      case "knock-knock":
+        return "door";
+      case "lawyer":
+        return "scale-balance";
+      case "medical":
+        return "medical-bag";
+      case "men & women":
+        return "account-group";
+      case "news & politics":
+        return "newspaper";
+      case "one-liners":
+        return "format-quote-close";
+      case "other & misc":
+        return "dots-horizontal";
+      case "puns":
+        return "emoticon-wink";
+      case "redneck":
+        return "tractor";
+      case "religious":
+        return "church";
+      case "sports":
+        return "basketball";
+      case "tech":
+        return "laptop";
+      case "yo mama":
+        return "emoticon-lol";
+      default:
+        return "emoticon-lol";
+    }
+  };
 
   return (
     <Pressable
       onPress={() => {
         navigator.navigate("jokelist", { category: categoryTitle });
       }}
-      // style={({ hovered }) => [styles.button, { opacity: hovered ? 0.5 : 1 }]}
+      style={({ pressed }) => [
+        styles.itemContainer,
+        { opacity: pressed ? 0.7 : 1 },
+      ]}
     >
-      <View
-        style={{
-          borderWidth: 2,
-          backgroundColor: "white",
-          width: screenwidth / 2.4,
-          height: screenheight / 5,
-          borderRadius: 10,
-          overflow: "hidden",
-        }}
-      >
-        <View
-          style={{
-            borderWidth: 0,
-            flex: 1,
-            borderRadius: 10,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <View
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Text
-              style={{
-                marginTop: 4,
-                fontFamily: "Poppins",
-                fontWeight: "300",
-              }}
-            >
-              {jokeCount} jokes
-            </Text>
-            <Image
-              source={imageLink as unknown as ImageSourcePropType}
-              style={{
-                width: 100,
-                height: 100,
-                objectFit: "cover",
-              }}
-            ></Image>
-          </View>
-          <Text
-            style={{
-              borderTopWidth: 2,
-              marginTop: "auto",
-              height: "100%",
-              textAlign: "center",
-              fontWeight: 900,
-              fontSize: 15,
-              backgroundColor: "#fcd24b",
-              borderBottomEndRadius: 8,
-              borderBottomStartRadius: 8,
-              color: "black",
-              fontFamily: "Poppins",
-              width: "100%",
-            }}
-          >
-            {categoryTitle}
-          </Text>
+      <Surface style={styles.item} elevation={1}>
+        <View style={styles.iconWrapper}>
+          <MaterialCommunityIcons
+            name={getCategoryIcon(categoryTitle)}
+            size={20}
+            color="#FF6B6B"
+          />
+          <Text style={styles.jokeCount}>{jokeCount}</Text>
         </View>
-      </View>
+        <Text style={styles.categoryTitle} numberOfLines={1}>
+          {categoryTitle}
+        </Text>
+      </Surface>
     </Pressable>
   );
 };
 
 const CategoryCards = () => {
   return (
-    <ScrollView
-      contentContainerStyle={{
-        display: "flex",
-        flexWrap: "wrap",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        paddingHorizontal: 20,
-        gap: 10,
-      }}
-      style={{
-        flex: 1,
-        display: "flex",
-      }}
-    >
-      {categories.map((category) => (
-        <CategoryCard
-          key={category.id}
-          imageLink={category.imageLink}
-          jokeCount={category.jokeCount}
-          categoryTitle={category.name}
-        />
-      ))}
-    </ScrollView>
+    <View style={styles.container}>
+      <View style={styles.gridContainer}>
+        {categories.map((category) => (
+          <CategoryItem
+            key={category.id}
+            jokeCount={category.jokeCount}
+            categoryTitle={category.name}
+          />
+        ))}
+      </View>
+    </View>
   );
 };
 
-const styles = { button: {} };
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 16,
+  },
+  gridContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 12,
+  },
+  itemContainer: {
+    width: ITEM_WIDTH,
+  },
+  item: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    padding: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    borderWidth: 1,
+    borderColor: "#F0F0F0",
+  },
+  iconWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+  },
+  jokeCount: {
+    fontFamily: "PoppinsBold",
+    fontSize: 12,
+    color: "#FF6B6B",
+  },
+  categoryTitle: {
+    flex: 1,
+    fontFamily: "Poppins",
+    fontSize: 12,
+    color: "#2D3436",
+  },
+});
 
 export default CategoryCards;
